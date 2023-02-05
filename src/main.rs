@@ -1,7 +1,7 @@
 use walloc::mem::Memory;
 
 fn main() {
-    let _big_mem = Memory::from_terabytes(999999999).unwrap();
+    let _big_mem = Memory::from_gigabytes(30).unwrap();
 
     loop {}
 }

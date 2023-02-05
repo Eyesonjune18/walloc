@@ -37,6 +37,7 @@ impl From<TryReserveError> for MemoryError {
 
 impl Memory {
     /// Creates a new Memory block with the specified size in bytes.
+    /// This method will return an error if the system denies the memory allocation request.
     pub fn new(size: usize) -> Result<Self, MemoryError> {
         let mut _bytes = Vec::new();
         _bytes.try_reserve_exact(size)?;
@@ -47,30 +48,35 @@ impl Memory {
 
     /// Creates a new Memory block with the specified size in bytes.
     /// Does the same thing as Memory::new(), but is more explicit and thus more readable.
+    /// This method will return an error if the system denies the memory allocation request.
     pub fn from_bytes(bytes: usize) -> Result<Self, MemoryError> {
         Self::new(bytes)
     }
 
     /// Creates a new Memory block with the specified size in kilobytes.
-    /// This method will return an error if the conversion from kilobytes to bytes causes an overflow.
+    /// This method will return an error if the conversion from kilobytes to bytes causes an overflow,
+    /// or if the system denies the memory allocation request.
     pub fn from_kilobytes(kilobytes: usize) -> Result<Self, MemoryError> {
         Self::new(kilobytes.checked_mul(BYTES_IN_KILOBYTE).ok_or(MemoryError::ByteOverflow)?)
     }
 
     /// Creates a new Memory block with the specified size in megabytes.
-    /// This method will return an error if the conversion from megabytes to bytes causes an overflow.
+    /// This method will return an error if the conversion from megabytes to bytes causes an overflow,
+    /// or if the system denies the memory allocation request.
     pub fn from_megabytes(megabytes: usize) -> Result<Self, MemoryError> {
         Self::new(megabytes.checked_mul(BYTES_IN_MEGABYTE).ok_or(MemoryError::ByteOverflow)?)
     }
 
     /// Creates a new Memory block with the specified size in gigabytes.
-    /// This method will return an error if the conversion from gigabytes to bytes causes an overflow.
+    /// This method will return an error if the conversion from gigabytes to bytes causes an overflow,
+    /// or if the system denies the memory allocation request.
     pub fn from_gigabytes(gigabytes: usize) -> Result<Self, MemoryError> {
         Self::new(gigabytes.checked_mul(BYTES_IN_GIGABYTE).ok_or(MemoryError::ByteOverflow)?)
     }
 
     /// Creates a new Memory block with the specified size in terabytes.
-    /// This method will return an error if the conversion from terabytes to bytes causes an overflow.
+    /// This method will return an error if the conversion from terabytes to bytes causes an overflow,
+    /// or if the system denies the memory allocation request.
     pub fn from_terabytes(terabytes: usize) -> Result<Self, MemoryError> {
         Self::new(terabytes.checked_mul(BYTES_IN_TERABYTE).ok_or(MemoryError::ByteOverflow)?)
     }
