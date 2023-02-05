@@ -6,6 +6,7 @@ license = "MIT OR Apache-2.0"
 description = "Malloc's Wario - allocates unusable, arbitrarily-sized blocks of memory on-command. Great for, uh, testing purposes?"
 keywords = ["walloc", "memory", "block", "allocate", "malloc"]
 categories = ["memory-management", "development-tools"]
+repository = "https://github.com/Eyesonjune18/walloc"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
